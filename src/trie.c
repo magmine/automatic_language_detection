@@ -1,7 +1,9 @@
-#include "trie.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "trie.h"
+#include "utils.h"
 
 // Initialise un trie et le renvoie.
 Trie* trie_init()
@@ -37,7 +39,7 @@ Trie* trie_insert(Trie *t, char * mot)
 }
 
 // Recherche le mot 'mot' dans le trie 't'. Renvoie true d'il y est, false sinon
-bool trie_rech(Trie *t, char * mot)
+bool trie_rech(Trie *t, char* mot)
 {
     int lgr = strlen(mot);
     int ind;
@@ -58,7 +60,7 @@ void trie_sup(Trie *t)
     for (int i = 0; i < 26; i++)
     {
         if (t->fils[i] != NULL)
-            trie_sup(t->fils);
+            trie_sup(t->fils[i]);
     }
     free(t);
 }
