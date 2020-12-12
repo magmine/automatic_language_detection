@@ -12,7 +12,7 @@ int iterate_label(void * context, void * const value)
 }
 
 
-Dawg minimiser(Dawg d, Stack s, struct hashmap_s h, int p)
+Dawg minimiser(Dawg d, Stack s, const struct hashmap_s* h, int p)
 {
     Arete a;
     char * key;
@@ -22,7 +22,7 @@ Dawg minimiser(Dawg d, Stack s, struct hashmap_s h, int p)
         a = stack_pop(s);
         if (hashmap_iterate(h, iterate_label, a->droite) != 0)
         {
-            a->gauche = a->droite
+            a->gauche = a->droite;
         }
     }
 }

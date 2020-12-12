@@ -3,6 +3,7 @@
 
 #include "stack.h"
 #include "hashmap.h"
+#include <stdbool.h>
 
 typedef struct dawg
 {
@@ -15,10 +16,10 @@ typedef struct arete
 {
     int id;
     Dawg gauche;
-    Dawg droit;
+    Dawg droite;
 } * Arete;
 
 
-Dawg minimiser(Dawg d, Stack s, struct hashmap h, int p);
+Dawg minimiser(Dawg d, Stack s, const struct hashmap_s *h, int p);
 
 #endif
