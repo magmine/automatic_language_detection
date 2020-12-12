@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 // Initialise un trie et le renvoie.
-Trie trie_init()
+Trie* trie_init()
 {
-    Trie nt = (Trie) malloc (sizeof(struct trie));
+    Trie* nt = (Trie*) malloc (sizeof(struct trie));
     if (nt == NULL)
         exit(EXIT_FAILURE);
     for (int i = 0; i < 26; i++)
@@ -19,12 +19,12 @@ Trie trie_init()
 // Insère le mot 'mot' dans le trie 't'. Si mot est déjà dans le t, il met à jour le
 // champ est_mot. Si le début de mot est déjà dans t, il part de ce préfixe pour le
 // nouveau mot.
-Trie trie_insert(Trie t, char * mot)
+Trie* trie_insert(Trie *t, char * mot)
 {
     int lgr = strlen(mot);
     int ind;
 
-    Trie tmp = t;
+    Trie *tmp = t;
     for (int i = 0; i < lgr; i++)
     {
         ind = ascii_to_index(mot[i]);
@@ -37,12 +37,12 @@ Trie trie_insert(Trie t, char * mot)
 }
 
 // Recherche le mot 'mot' dans le trie 't'. Renvoie true d'il y est, false sinon
-bool trie_rech(Trie t, char * mot)
+bool trie_rech(Trie *t, char * mot)
 {
     int lgr = strlen(mot);
     int ind;
 
-    Trie tmp = t;
+    Trie *tmp = t;
     for (int i = 0; i < lgr; i++)
     {
         ind = ascii_to_index(mot[i]);
@@ -53,7 +53,7 @@ bool trie_rech(Trie t, char * mot)
     return (tmp != NULL && tmp->est_mot);
 }
 
-void trie_sup(Trie t)
+void trie_sup(Trie *t)
 {
     for (int i = 0; i < 26; i++)
     {
