@@ -20,7 +20,7 @@ cc -o trie main.o trie.o utils.o
 --> Found : abada
 --> Found : abarticulation
 --> Found : abdominohysterectomy
-~/hy everyone this is working
+hy everyone this is working
 C'est une phrase en anglais
 quelle belle journee
 C'est une phrase en français
