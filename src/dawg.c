@@ -1,6 +1,7 @@
 #include "dawg.h"
 #include "stack.h"
 #include "hashmap.h"
+#include "utils.h"
 
 int iterate_label(void * context, void * const value)
 {
@@ -21,26 +22,36 @@ Dawg *dawg_init() {
     return dawg;
 }
 
+/**
+ * ----Algorithme d'insertion----
+ * -- Si le mot precedent est null on ajoute le mot à la racine
+ * //et en ajoute tous ces sommets au hashmap
+ * -- Si un mot existe on trouve le prefix commun le plus long
+ * -- Le suffix non commun on l'ajoute 
+*/
+
 //start by inserting and then we see the other phases
 void dawg_insert(Dawg *dawg, char *mot, char *dernier_mot, Stack st, struct hashmap_s *h_map) {
     int lgr = strlen(mot);
     int ind;
 
-    Dawg *tmp = dawg;
-    if (dernier_mot == NULL) {
-        for (int i = 0; i < lgr; i++)
-        {
-            ind = ascii_to_index(mot[i]);
-            if (tmp->fils[ind] == NULL)
-                tmp->fils[ind] = trie_init();
-            tmp = tmp->fils[ind];
-        }
-        tmp->est_mot = true;
-    } else {
-        //Check if stack is empty ?
-
-        //
+    // Dawg *tmp = dawg;
+    // if (dernier_mot == NULL) {
+    //     for (int i = 0; i < lgr; i++)
+    //     {
+    //         ind = ascii_to_index(mot[i]);
+    //         if (tmp->fils[ind] == NULL)
+    //             tmp->fils[ind] = dawg_init();
+    //         tmp = tmp->fils[ind];
+    //     }
+    //     tmp->est_mot = true;
+    // } else {
+    int p = max_prefix_commun(mot, dernier_mot);
+    minimiser(dawg, st, h_map, p);
+    if (stack_size(st) == 0) {
+        
     }
+    // }
 }
 
 

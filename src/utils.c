@@ -48,3 +48,18 @@ char* concat(const char *s1, const char *s2)
     strcat(result, s2);
     return result;
 }
+
+int max_prefix_commun(char *s1, char *s2) {
+
+    if (s1 == NULL || s2 == NULL) return 0;
+    int l1 = strlen(s1);
+    int l2 = strlen(s2);
+    int i = 0;
+    while(i < l1 && i < l2) {
+        if (s1[i] != s2[i]) {
+            return i;
+        }
+        i++;
+    }
+    return i;
+}
