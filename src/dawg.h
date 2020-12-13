@@ -20,7 +20,7 @@ typedef struct arete
 } Arete;
 
 
-Dawg *minimiser(Dawg *dawg, Stack st, const struct hashmap_s *h_map, int p);
+void minimiser(Dawg *dawg, Stack st, const struct hashmap_s *h_map, int p);
 void dawg_insert(Dawg *dawg, char *mot, char *dernier_mot, Stack st, struct hashmap_s *h_map);
 Dawg *dawg_init();
 

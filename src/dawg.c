@@ -35,28 +35,27 @@ void dawg_insert(Dawg *dawg, char *mot, char *dernier_mot, Stack st, struct hash
     int lgr = strlen(mot);
     int ind;
 
-    // Dawg *tmp = dawg;
-    // if (dernier_mot == NULL) {
-    //     for (int i = 0; i < lgr; i++)
-    //     {
-    //         ind = ascii_to_index(mot[i]);
-    //         if (tmp->fils[ind] == NULL)
-    //             tmp->fils[ind] = dawg_init();
-    //         tmp = tmp->fils[ind];
-    //     }
-    //     tmp->est_mot = true;
-    // } else {
+    Dawg *tmp = dawg;
     int p = max_prefix_commun(mot, dernier_mot);
+    dernier_mot = mot;
     minimiser(dawg, st, h_map, p);
     if (stack_size(st) == 0) {
-        
+        if (dernier_mot == NULL) {
+            for (int i = p; i < lgr; i++)
+            {
+                ind = ascii_to_index(mot[i]);
+                if (tmp->fils[ind] == NULL)
+                    tmp->fils[ind] = dawg_init();
+                tmp = tmp->fils[ind];
+            }
+            tmp->est_mot = true;
+        }
     }
-    // }
 }
 
 
 
-Dawg *minimiser(Dawg *dawg, Stack st, const struct hashmap_s* h_map, int p)
+void minimiser(Dawg *dawg, Stack st, const struct hashmap_s* h_map, int p)
 {
     Arete *arret;
     char * key;
