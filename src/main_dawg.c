@@ -9,12 +9,6 @@
 #define H_MAP_INIT_SIZE 1024
 #define MAX_LINE_LENGTH 10000
 
-/*
- * Copy this function template to construct either a DAWG or a trie
- * based on the dictionary filename given
- *
- * Don't forget to change the void return type of this function
- */
 Dawg* construct(char *dict) {
 
     char *line = NULL;
@@ -62,15 +56,12 @@ Dawg* construct(char *dict) {
 
 
 int main(int argc, char* argv[]) {
-    // construct("dict/french-wordlist.txt", true);
     Dawg *dawg_english = construct("dict/english-wordlist.txt");
     Dawg *dawg_french = construct("dict/french-wordlist.txt");
     Dawg *dawg_german = construct("dict/german-wordlist.txt");
-    // construct("dict/german-wordlist.txt", true);
 
-    // Here listen for user input, parse it and detect the language of the given text
-    // To complete ...
-    assert(dawg_rech(dawg_english, "abada"));
+    printf("--------------Test------------------\n");
+    assert(dawg_rech(dawg_english, "abada")); //Test using a word from the dictionary
     printf("--> Found : abada\n");
 
     assert(dawg_rech(dawg_english, "abarticulation"));
@@ -79,7 +70,10 @@ int main(int argc, char* argv[]) {
 
     assert(dawg_rech(dawg_english, "abdominohysterectomy"));
     printf("--> Found : abdominohysterectomy\n");
+    printf("------------end Test------------------\n");
 
+
+    // Listen for user input, parse it and detect the language of the given text
     char    *line;
     size_t  n = MAX_LINE_LENGTH;
     size_t read;
@@ -93,13 +87,13 @@ int main(int argc, char* argv[]) {
         {
             //printf(":::: ptr = %s\n", ptr);
             parse_word(ptr);
-            if (trie_rech(dawg_english, ptr)) {
+            if (dawg_rech(dawg_english, ptr)) {
                 freq_english++;
             }
-            if (trie_rech(dawg_french, ptr)) {
+            if (dawg_rech(dawg_french, ptr)) {
                 freq_french++;
             }
-            if (trie_rech(dawg_german, ptr)) {
+            if (dawg_rech(dawg_german, ptr)) {
                 freq_german++;
             }
             ptr = strtok(NULL, " ,-:][{}().;\"");
