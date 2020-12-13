@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
         char *ptr = strtok(line," ,-:][{}().;\"");
         while (ptr != NULL)
         {
-            printf(":::: ptr = %s\n", ptr);
+            //printf(":::: ptr = %s\n", ptr);
             parse_word(ptr);
             if (trie_rech(trie_english, ptr)) {
                 freq_english++;
